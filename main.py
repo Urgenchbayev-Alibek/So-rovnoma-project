@@ -1,7 +1,5 @@
 import sys
-
-
-from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QVBoxLayout, QComboBox, QRadioButton, QPushButton, QMessageBox
+from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QVBoxLayout, QComboBox, QRadioButton, QPushButton, QMessageBox, QHBoxLayout
 from database import Connection_DB
 
 class MainWindow(QWidget):
@@ -14,58 +12,59 @@ class MainWindow(QWidget):
 
     def initUI(self):
         layout = QVBoxLayout()
-
         self.ism_label = QLabel("Ism")
-        self.ism_input = QLineEdit()
         self.Sharif_label = QLabel("Sharif")
-        self.Sharif_input = QLineEdit()
         self.Yosh_label = QLabel("Yosh")
-        self.Yosh_input = QLineEdit()
         self.Jins_label = QLabel("Jins")
+        self.Viloyat_label = QLabel("Viloyat")
+        self.Telefon_label = QLabel("Telefon")
+        self.Fakultet_label = QLabel("Fakultet")
+        self.Kurs_label = QLabel("Kurs")
+        self.save_button = QPushButton("Saqlash")
+        self.save_button.clicked.connect(self.save_student)
 
+        layout.addWidget(self.ism_label)
+        layout.addWidget(self.Sharif_label)
+        layout.addWidget(self.Yosh_label)
+        layout.addWidget(self.Jins_label)
+        layout.addWidget(self.Viloyat_label)
+        layout.addWidget(self.Telefon_label)
+        layout.addWidget(self.Fakultet_label)
+        layout.addWidget(self.Kurs_label)
+        layout.addWidget(self.save_button)
+
+        layout2 = QVBoxLayout()
+        self.ism_input = QLineEdit()
+        self.Sharif_input = QLineEdit()
+        self.Yosh_input = QLineEdit()
         self.erkak_radio = QRadioButton("Erkak", self)
         self.ayol_radio = QRadioButton("Ayol", self)
         self.erkak_radio.setChecked(True)
-
-        self.Viloyat_label = QLabel("Viloyat")
         self.Viloyat_input = QComboBox(self)
         self.Viloyat_input.addItems([
             "Toshkent viloyati", "Andijon viloyati", "Farg'ona viloyati", "Namangan viloyati",
             "Samarqand viloyati", "Buxoro viloyati", "Navoiy viloyati", "Qashqadaryo viloyati",
             "Surxondaryo viloyati", "Jizzax viloyati", "Sirdaryo viloyati", "Xorazm viloyati"
         ])
-
-        self.Telefon_label = QLabel("Telefon")
         self.Telefon_input = QLineEdit('+')
-        self.Fakultet_label = QLabel("Fakultet")
         self.Fakultet_input = QLineEdit()
-        self.Kurs_label = QLabel("Kurs")
         self.Kurs_input = QComboBox()
         self.Kurs_input.addItems(["1-kurs", "2-kurs", "3-kurs", "4-kurs"])
 
-        self.save_button = QPushButton("Saqlash")
-        self.save_button.clicked.connect(self.save_student)
+        layout2.addWidget(self.ism_input)
+        layout2.addWidget(self.Sharif_input)
+        layout2.addWidget(self.Yosh_input)
+        layout2.addWidget(self.erkak_radio)
+        layout2.addWidget(self.ayol_radio)
+        layout2.addWidget(self.Viloyat_input)
+        layout2.addWidget(self.Telefon_input)
+        layout2.addWidget(self.Fakultet_input)
+        layout2.addWidget(self.Kurs_input)
 
-        layout.addWidget(self.ism_label)
-        layout.addWidget(self.ism_input)
-        layout.addWidget(self.Sharif_label)
-        layout.addWidget(self.Sharif_input)
-        layout.addWidget(self.Yosh_label)
-        layout.addWidget(self.Yosh_input)
-        layout.addWidget(self.Jins_label)
-        layout.addWidget(self.erkak_radio)
-        layout.addWidget(self.ayol_radio)
-        layout.addWidget(self.Viloyat_label)
-        layout.addWidget(self.Viloyat_input)
-        layout.addWidget(self.Telefon_label)
-        layout.addWidget(self.Telefon_input)
-        layout.addWidget(self.Fakultet_label)
-        layout.addWidget(self.Fakultet_input)
-        layout.addWidget(self.Kurs_label)
-        layout.addWidget(self.Kurs_input)
-        layout.addWidget(self.save_button)
-
-        self.setLayout(layout)
+        main_layout = QHBoxLayout()
+        main_layout.addLayout(layout)
+        main_layout.addLayout(layout2)
+        self.setLayout(main_layout)
 
     def save_student(self):
         first_name = self.ism_input.text()
