@@ -1,4 +1,4 @@
-# database.py
+
 import pymysql
 from pymysql.cursors import DictCursor
 
@@ -24,17 +24,17 @@ class Connection_DB:
                 cursor.execute('CREATE DATABASE IF NOT EXISTS collage')
                 cursor.execute('USE collage')
 
-                cursor.execute('DROP TABLE IF EXISTS students')
-                cursor.execute("""CREATE TABLE IF NOT EXISTS students (      
-                  id INT PRIMARY KEY AUTO_INCREMENT,
-                  first_name VARCHAR(32),
-                  last_name VARCHAR(32),
-                  age INT,
-                  gender VARCHAR(16),
-                  region VARCHAR(32),
-                  phone VARCHAR(15),
-                  faculty VARCHAR(16),
-                  course VARCHAR(8)
+                cursor.execute("""
+                CREATE TABLE IF NOT EXISTS students (      
+                   id INT PRIMARY KEY AUTO_INCREMENT,
+                   first_name VARCHAR(32),
+                   last_name VARCHAR(32),
+                   age INT,
+                   gender VARCHAR(16),
+                   region VARCHAR(32),
+                   phone VARCHAR(15),
+                   faculty VARCHAR(16),
+                   course VARCHAR(8)
                 );""")
             self.conn.commit()
         except pymysql.MySQLError as e:
